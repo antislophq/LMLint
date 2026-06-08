@@ -12,12 +12,42 @@ What if every single PR comment could be converted into a rule? Take this commen
 
 Converting this into an ESLint rule isn't trivial since it requires defining an AST-based rule.
 
-With LMLint, the above comment can be turned into a rule with a simple GitHub comment (`@lmlint make this a rule`). LMLint then opens a PR with the rule added.
+With LMLint, creating a rule is as simple as commenting `@lmlint make this a rule`. LMLint then opens a PR with the rule added as a markdown file.
 
-### Isn't this expensive?
+### Install
 
-LLM-based rules are more expensive to run that traditional lint rules that are defined in code. However, LMLint is intentionally designed to reduced costs. (a) it works well with cheap models and (b) is Git-aware, so it only runs on changed files.
+```bash
+curl -sSL https://raw.githubusercontent.com/antislophq/lmlint/main/install.sh | bash
+```
 
-### Isn't this slow?
+### Usage
 
-Not really. Rules can be evaluated in parallel, so running time doesn't significantly vary with the number of rules or files.
+Run the `init` command to create a sample rule:
+
+```bash
+# Creates a .rules/ directory with a sample rule
+lmlint init
+```
+
+Then run the `check` command to run the rule:
+
+```bash
+lmlint check
+```
+
+### FAQs
+
+#### Is this slow?
+
+Not really. Rules are evaluated in parallel, so a run completes within a few seconds irrespective of the number of rules or files.
+
+#### Is this expensive?
+
+LMLint is intentionally designed to reduced costs:
+
+- LMLint works well with cheap models (like Claude Haiku, or the GPT mini series) as long as your rules are concise
+- LMLint is Git-aware, so it only runs on changed files by default
+
+#### Is this unreliable?
+
+If your rules are small & specific, LMLint is fairly reliable. When rules are large or ambiguous, LMLint may produce false positives or negatives. Such failures are fixed by updating rules over time. To make this easier, LMLint also provides a `preview` command that looks at previous PRs and shows what a rule would've flagged.
