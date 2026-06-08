@@ -2,7 +2,7 @@ LMLint is a linter that uses rules defined in markdown.
 
 <!--LMLint is designed to work with cheap models and is Git-aware, so it only runs on changed files.-->
 
-# Motivation
+## Motivation
 
 What if every single PR comment could be converted into a rule? Take this comment for example:
 
@@ -12,13 +12,13 @@ Converting this into an ESLint rule isn't trivial since it requires defining an 
 
 With LMLint, creating a rule is as simple as commenting `@lmlint make this a rule`. LMLint then opens a PR with the rule added as a markdown file.
 
-# Install
+## Install
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/antislophq/lmlint/main/install.sh | bash
 ```
 
-# Usage
+## Usage
 
 Run the `init` command to create a sample rule:
 
@@ -33,7 +33,7 @@ Then run the `check` command to run the rule:
 lmlint check
 ```
 
-# FAQs
+## FAQs
 
 ### Is this slow?
 
